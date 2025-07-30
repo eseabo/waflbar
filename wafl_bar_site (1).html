@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wafl Bar - Premium Waffles & Pizzelles Delivered</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #60a5fa, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(30,64,175,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #1e40af;
+            animation: slideInUp 1s ease 0.2s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #2563eb, #3b82f6);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37,99,235,0.3);
+            animation: slideInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(37,99,235,0.4);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e40af;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #2563eb, #60a5fa);
+            border-radius: 2px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .product-icon {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #1e40af;
+        }
+
+        .product-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            text-align: center;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #2563eb;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-button {
+            width: 100%;
+            background: linear-gradient(45deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .order-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30,64,175,0.3);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #1e40af;
+        }
+
+        /* Shipping Section */
+        .shipping {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .shipping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .shipping-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .shipping-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .shipping-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #93c5fd;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #93c5fd;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Wafl Bar</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#shipping">Shipping</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Artisan Waffles & Pizzelles</h1>
+                <p>Handcrafted deliciousness delivered fresh to your door</p>
+                <a href="#products" class="cta-button">Order Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Our Delicious Offerings</h2>
+            <div class="product-grid">
+                <div class="product-card fade-in">
+                    <div class="product-icon">🧇</div>
+                    <h3>Premium Waffles</h3>
+                    <p>Belgian-style waffles made with organic ingredients and shipped fresh nationwide</p>
+                    <ul class="product-features">
+                        <li>Made with organic flour & real vanilla</li>
+                        <li>Crispy exterior, fluffy interior</li>
+                        <li>Available in 6-pack or 12-pack</li>
+                        <li>Ships frozen, stays fresh for weeks</li>
+                        <li>Multiple flavors available</li>
+                    </ul>
+                    <div class="price">Starting at $24.99</div>
+                    <button class="order-button">Order Waffles</button>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-icon">🍪</div>
+                    <h3>Artisan Pizzelles</h3>
+                    <p>Traditional Italian cookies pressed to perfection with authentic family recipes</p>
+                    <ul class="product-features">
+                        <li>Traditional Italian recipe</li>
+                        <li>Delicate, crispy texture</li>
+                        <li>Classic anise & vanilla flavors</li>
+                        <li>Gift boxes available</li>
+                        <li>Made fresh weekly</li>
+                    </ul>
+                    <div class="price">Starting at $19.99</div>
+                    <button class="order-button">Order Pizzelles</button>
+                </div>
+
+                <div class="product-card fade-in">
+                    <div class="product-icon">🎁</div>
+                    <h3>Gift Bundles</h3>
+                    <p>Perfect combinations of waffles and pizzelles for any special occasion</p>
+                    <ul class="product-features">
+                        <li>Waffles & pizzelles combo</li>
+                        <li>Beautiful gift packaging</li>
+                        <li>Customizable selections</li>
+                        <li>Perfect for holidays</li>
+                        <li>Corporate gifts available</li>
+                    </ul>
+                    <div class="price">Starting at $39.99</div>
+                    <button class="order-button">Order Bundle</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Wafl Bar</h2>
+            <div class="about-content">
+                <p>Founded with a passion for authentic, handcrafted treats, Wafl Bar brings together the best of Belgian waffle tradition and Italian pizzelle artistry. Every product is made in small batches using premium ingredients and time-honored techniques.</p>
+                <p>Our waffles are crafted with organic flour, real vanilla, and pure butter, then flash-frozen to preserve their fresh-baked taste. Our pizzelles follow authentic Italian family recipes, pressed to delicate perfection with just the right amount of sweetness.</p>
+                <p>From our kitchen to your table, we're committed to delivering exceptional quality and unforgettable flavors that bring joy to every bite.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="shipping" class="shipping">
+        <div class="container">
+            <h2 class="section-title">Nationwide Shipping</h2>
+            <div class="shipping-grid">
+                <div class="shipping-card fade-in">
+                    <div class="shipping-icon">📦</div>
+                    <h3>Fast Shipping</h3>
+                    <p>Orders ship within 1-2 business days via expedited delivery</p>
+                </div>
+                <div class="shipping-card fade-in">
+                    <div class="shipping-icon">❄️</div>
+                    <h3>Temperature Controlled</h3>
+                    <p>Insulated packaging keeps products fresh during transit</p>
+                </div>
+                <div class="shipping-card fade-in">
+                    <div class="shipping-icon">🚛</div>
+                    <h3>Nationwide Delivery</h3>
+                    <p>We ship to all 50 states with tracking included</p>
+                </div>
+                <div class="shipping-card fade-in">
+                    <div class="shipping-icon">💝</div>
+                    <h3>Gift Options</h3>
+                    <p>Special gift wrapping and personalized messages available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>📧 orders@waflbar.com</p>
+                    <p>📞 1-800-WAFL-BAR</p>
+                    <p>🕒 Mon-Fri 9AM-6PM EST</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#products">Our Products</a></p>
+                    <p><a href="#shipping">Shipping Info</a></p>
+                    <p><a href="#">FAQ</a></p>
+                    <p><a href="#">Returns</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <p><a href="#">Instagram</a></p>
+                    <p><a href="#">Facebook</a></p>
+                    <p><a href="#">Twitter</a></p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-top: 20px;">
+                <p>&copy; 2025 Wafl Bar. All rights reserved. | Made with ❤️ for waffle and pizzelle lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Order button interactions
+        document.querySelectorAll('.order-button, .cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.6)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(30,64,175,0.95), rgba(59,130,246,0.95))';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1e40af, #3b82f6)';
+            }
+        });
+    </script>
+</body>
+</html>
